@@ -1,40 +1,36 @@
 <div class="container">
-  <div class="row">
-    <div class="col-sm-6">
-      <% @vans.each do |van| %>
-        <div class="card-trip">
-        <% if van.photo.attached? %>
-            <%= cl_image_tag van.photo.key, height: 300, width: 400, crop: :fill %>
-        <% end %>
-          <div class="card-trip-infos">
-          <div>
-          <h2><%= link_to van.title, van_path(van) %></h2>
-          <p><%= van.description %></p>
-          <h5><%= van.average_stars %> <% van.average_stars.to_f.round.times do %>
-            <i class="fas fa-star"></i>
-          <% end %>
-          </h5>
-          </div>
-          <h2 class="card-trip-pricing">$<%= van.price %> /per day</h2>
-          <% if van.user.photo.attached? %>
-            <%= cl_image_tag van.user.photo.key, height: 40, width: 40, crop: :fill, class: "card-trip-user avatar-bordered" %>
-          <% else %>
-            <img src="https://icons-for-free.com/iconfiles/png/512/person+profile+user+icon-1320184018411209468.png" class="card-trip-user avatar-bordered" />
-          <% end %>
-          </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-7 col-lg-8">
+            <% @vans.each do |van| %>
+            <div class="card-trip">
+                <% if van.photo.attached? %>
+                <%= cl_image_tag van.photo.key, height: 300, width: 400, crop: :fill %>
+                <% end %>
+                <div class="card-trip-infos">
+                    <div>
+                        <h2><%= link_to van.title, van_path(van) %></h2>
+                        <p><%= van.description %></p>
+                        <h5><%= van.average_stars %> <% van.average_stars.to_f.round.times do %>
+                            <i class="fas fa-star"></i>
+                            <% end %>
+                        </h5>
+                    </div>
+                    <h2 class="card-trip-pricing">$<%= van.price %> / per day</h2>
+                    <% if van.user.photo.attached? %>
+                    <%= cl_image_tag van.user.photo.key, height: 40, width: 40, crop: :fill, class: "card-trip-user avatar-bordered" %>
+                    <% else %>
+                    <img src="https://icons-for-free.com/iconfiles/png/512/person+profile+user+icon-1320184018411209468.png" class="card-trip-user avatar-bordered" />
+                    <% end %>
+                </div>
+            </div>
+            <% end %>
         </div>
-      <% end %>
-    </div>
-    <div class="col-sm-6">
+        <div class="col-sm-5 col-lg-4">
 
-        <div id="map"
-        style="width: 100%; height: 600px;"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+            <div id="map" style="width: 100%; height: 600px;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+            </div>
+
         </div>
 
     </div>
-
-  </div>
 </div>
-
